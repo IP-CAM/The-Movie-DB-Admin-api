@@ -35,11 +35,20 @@
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-dashboard" class="form-horizontal">
           
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-sort-order"><?php echo $entry_sort_order; ?></label>
+            <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="dashboard_tmdb_sort_order" value="<?php echo $dashboard_tmdb_sort_order; ?>" placeholder="<?php echo $entry_sort_order; ?>" id="input-sort-order" class="form-control" />
+              <select name="dashboard_tmdb_status" id="input-status" class="form-control">
+                <?php if ($dashboard_tmdb_status) { ?>
+                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                <option value="0"><?php echo $text_disabled; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_enabled; ?></option>
+                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                <?php } ?>
+              </select>
             </div>
           </div>
+          
         </form>
       </div>
     </div>
