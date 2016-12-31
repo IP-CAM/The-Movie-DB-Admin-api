@@ -51,6 +51,7 @@ class ControllerCommonDashboard extends Controller {
 		}
 
 		$sort_order = array();
+
 		foreach ($dashboards as $key => $value) {
 			$sort_order[$key] = $value['sort_order'];
 		}
