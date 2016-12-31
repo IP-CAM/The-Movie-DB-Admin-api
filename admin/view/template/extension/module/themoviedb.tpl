@@ -56,6 +56,6 @@
     </div>
   </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 <script src="view/javascript/extension/module/themoviedb/searchCtrl.js"></script>
 <?php echo $footer; ?>

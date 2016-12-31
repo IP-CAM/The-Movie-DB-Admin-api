@@ -1,3 +1,8 @@
+/**
+ * @author Michel Lima
+ * @type angular.module.angular-1_3_6_L1749.moduleInstance
+ */
+
 var app = angular.module('myApp', []);
 app.controller('movieSearchCtrl', function($scope, $http) {
   api_key = "b194419a3560ccbbfd27972fcad10634";
@@ -13,7 +18,7 @@ app.controller('movieSearchCtrl', function($scope, $http) {
             $scope.msg =  $scope.searchString;
         });
     }else{
-        $scope.msg = "Insira um valor maior que 2";
+        $scope.msg = "You must insert a valid movie title.";
         $scope.results = "";
     }
   }
