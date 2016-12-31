@@ -36,6 +36,7 @@ class ControllerCommonDashboard extends Controller {
 		
 		// Add all the modules which have multiple settings for each module
 		foreach ($extensions as $code) {
+                    echo $code . "-" . $this->config->get('dashboard_' . $code . '_status');
 			if ($this->config->get('dashboard_' . $code . '_status') && $this->user->hasPermission('access', 'extension/dashboard/' . $code)) {
 				$output = $this->load->controller('extension/dashboard/' . $code . '/dashboard');
 				
@@ -51,7 +52,6 @@ class ControllerCommonDashboard extends Controller {
 		}
 
 		$sort_order = array();
-
 		foreach ($dashboards as $key => $value) {
 			$sort_order[$key] = $value['sort_order'];
 		}
