@@ -22,9 +22,19 @@
                     <p>{{msg}}</p>
                 </div>
             </fieldset>
-
-            
+            <hr>
+            <h3>Últimos lançamentos</h3>
             <div class="row">
+                <div class="input-group col-lg-12">
+                    
+                    <label>Ano de lançamento</label>
+                    <select ng-model="year" ng-change="searchByYear()">
+                        <option value="2015">2015</option>
+                        <option value="2016" selected="selected">2016</option>
+                        <option value="2017">2017</option>
+                    </select>
+                        
+                </div>
                 <div class="col-sm-2" ng-repeat="movie in results">
                     <div class="thumbnail">
                         <a ng-if="movie.poster_path">
@@ -40,7 +50,7 @@
             </div>
             <hr>
                 
-            <h3>Últimos lançamentos</h3>
+            <h3>Adicionados recentemente no TMDB</h3>
             <div class="row">
                 <div class="col-sm-2">
                     <div class="thumbnail">

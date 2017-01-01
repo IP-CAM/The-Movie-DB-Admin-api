@@ -7,17 +7,22 @@ var app = angular.module('myApp', []);
 app.controller('movieSearchCtrl', function ($scope, $http) {
     api_key = "b194419a3560ccbbfd27972fcad10634";
     $scope.searchString = "";
+    $scope.year = "2016";
+
     $scope.msg = "";
+    date = new Date();
+    year = date.getFullYear();
 
     url = "https://api.themoviedb.org/3/discover/movie?api_key=";
     $http.get(
-        url
-        + api_key
-        + "&language=pt-BR"
-        +"&primary_release_year=2016&sort_by=primary_release_date.desc"
+            url
+            + api_key
+            + "&language=pt-BR"
+            + "&primary_release_year=" + 2016
+            + "&sort_by=primary_release_date.desc"
 
-        ).then(function (response) {
-            $scope.results = response.data.results;
+            ).then(function (response) {
+        $scope.results = response.data.results;
     });
 
     url = "https://api.themoviedb.org/3/movie/latest?api_key=";
@@ -27,7 +32,7 @@ app.controller('movieSearchCtrl', function ($scope, $http) {
             + "&language=pt-BR"
 
             ).then(function (response) {
-                console.log(response.data);
+        console.log(response.data);
         $scope.latest = response.data;
     });
 
@@ -47,6 +52,21 @@ app.controller('movieSearchCtrl', function ($scope, $http) {
             $scope.msg = "Digite um nome válido";
             $scope.results = "";
         }
+    }
+
+    $scope.searchByYear = function () {
+        console.log($scope.year);
+        url = "https://api.themoviedb.org/3/discover/movie?api_key=";
+        $http.get(
+                url
+                + api_key
+                + "&language=pt-BR"
+                + "&primary_release_year=" + $scope.year
+                + "&sort_by=primary_release_date.desc"
+
+                ).then(function (response) {
+            $scope.results = response.data.results;
+        });
     }
 
 });
