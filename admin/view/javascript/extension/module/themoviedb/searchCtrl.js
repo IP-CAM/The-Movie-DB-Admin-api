@@ -9,7 +9,16 @@ app.controller('movieSearchCtrl', function ($scope, $http) {
     $scope.searchString = "";
     $scope.msg = "";
 
+    url = "https://api.themoviedb.org/3/discover/movie?api_key=";
+    $http.get(
+        url
+        + api_key
+        + "&language=pt-BR"
+        +"&primary_release_year=2016&sort_by=primary_release_date.desc"
 
+        ).then(function (response) {
+            $scope.results = response.data.results;
+    });
 
     url = "https://api.themoviedb.org/3/movie/latest?api_key=";
     $http.get(

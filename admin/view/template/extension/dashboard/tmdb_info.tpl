@@ -49,6 +49,7 @@
                         </a>
                         <div class="caption">
                             <h3>{{ latest.title}}</h3>
+                            <h4>{{latest.release_date}}</h4>
                             <p>{{latest.overview}}</p>
                             <p><a href="#" class="btn btn-primary" role="button">Ver Detalhes</a></p>
                         </div>
