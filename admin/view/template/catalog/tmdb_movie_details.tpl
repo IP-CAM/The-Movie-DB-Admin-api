@@ -35,10 +35,14 @@
                         Sem capa cadastrada
                 </div>
                 <div class="col-lg-10">
-                    <p ng-if="movie.overview">Data de lançamento {{movie.release_date}}</p>
-                    <p ng-if="movie.overview">{{movie.overview}}</p>
-                    <p ng-if="!movie.overview">Nenhuma descrição cadastrada para esse filme</p>
+                    <span ng-if="movie.release_date">Data de lançamento {{movie.release_date}}</span>
+                    <span ng-if="!movie.release_date">Sem data de lançamento cadastrada</span>
+                    <span ng-if="movie.overview">{{movie.overview}}</span>
+                    <span ng-if="!movie.overview">Nenhuma descrição cadastrada para esse filme</span>
                 </div>
+                <div class='row'>
+                    <p><a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Adicionar à meus filmes</a></p>
+                </div>    
             </div>
         </div>
     </div>

@@ -29,12 +29,20 @@ class ControllerCatalogTmdbMovie extends Controller {
             } else {
                 $data['error_warning'] = '';
             }
+            $data['token'] = $this->session->data['token'];
             $data['header'] = $this->load->controller('common/header');
             $data['column_left'] = $this->load->controller('common/column_left');
             $data['footer'] = $this->load->controller('common/footer');
 
             $this->response->setOutput($this->load->view('catalog/tmdb_movie_details', $data));
         }
+    }
+    
+    public function add() {
+        $this->load->model("extension/module/themoviedb");
+        
+        $this->model_extension_module_themoviedb->add($this->request->get['movie_id'],$this->user->getId());
+        $this->response->redirect($this->url->link('catalog/tmdb_movie/moviedetails', 'token=' . $this->session->data['token'] . "&movie_id=" . $this->request->get['movie_id'] . $url, true));
     }
 
     protected function validateForm() {

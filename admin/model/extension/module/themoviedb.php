@@ -19,4 +19,16 @@ class ModelExtensionMOduleThemoviedb extends Model {
 		$this->db->query("DROP TABLE IF EXISTS `" . DB_PREFIX . "themoviedb_module`;");
 	}
 
+        public function add($movieId, $userid) {
+            $sql = "
+                INSERT INTO `" . DB_PREFIX . "themoviedb_module` 
+                (`user_id`, `movie_id`) VALUES 
+                (
+                    '" . $userid . "'
+                    ,'" . $movieId . "'
+                );
+            ";
+            $query = $this->db->query($sql);
+        }
+        
 }
