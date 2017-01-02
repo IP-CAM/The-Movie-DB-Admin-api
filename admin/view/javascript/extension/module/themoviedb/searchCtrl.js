@@ -7,18 +7,19 @@ var app = angular.module('myApp', []);
 app.controller('movieSearchCtrl', function ($scope, $http) {
     api_key = "b194419a3560ccbbfd27972fcad10634";
     $scope.searchString = "";
-    $scope.year = "2016";
-
-    $scope.msg = "";
     date = new Date();
     year = date.getFullYear();
+    $scope.year = year.toString();
+
+    $scope.msg = "";
+    
 
     url = "https://api.themoviedb.org/3/discover/movie?api_key=";
     $http.get(
             url
             + api_key
             + "&language=pt-BR"
-            + "&primary_release_year=" + 2016
+            + "&primary_release_year=" + year
             + "&sort_by=primary_release_date.desc"
 
             ).then(function (response) {

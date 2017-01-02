@@ -25,27 +25,32 @@
             </fieldset>
             <hr>
             <h3>Últimos lançamentos</h3>
-            <div class="row">
-                <div class="input-group col-lg-12">
-                    
-                    <label>Ano de lançamento</label>
-                    <select ng-model="year" ng-change="searchByYear()">
-                        <option value="2015">2015</option>
-                        <option value="2016" selected="selected">2016</option>
+            <fieldset >
+
+                <div class="well col-lg-2">
+                    <h4>Filtrar por ano</h4>
+                    <select ng-model="year" ng-change="searchByYear()" class="form-control">
                         <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
                     </select>
-                        
                 </div>
+            </fieldset>
+            <div class="row">
                 <div class="col-sm-2" ng-repeat="movie in results">
                     <div class="thumbnail">
                         <a ng-if="movie.poster_path">
                             <img src="https://image.tmdb.org/t/p/w150/{{movie.poster_path}}" class="left" width="300" alt="{{movie.title}}">
                         </a>
-                        <div class="no-image">Sem capa cadastrada</div>
+                        <div class="no-image" ng-if="!movie.poster_path">
+                            <i class="fa fa-minus-circle"></i>
+                            <br>
+                            Sem capa cadastrada
+                        </div>
                         <div class="caption">
-                            <h3>{{ movie.title}}</h3>
+                            <h4>{{ movie.title}}</h4>
                             <p>{{movie.overview}}</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Detalhes</a></p>
+                            <p><a href="#" class="btn btn-primary" role="button details">Ver Detalhes</a></p>
                         </div>
                     </div>
                 </div>
@@ -59,8 +64,13 @@
                         <a ng-if="latest.poster_path">
                             <img src="https://image.tmdb.org/t/p/w150/{{latest.poster_path}}" class="left" width="300" alt="{{latest.title}}">
                         </a>
+                        <div class="no-image" ng-if="!movie.poster_path">
+                            <i class="fa fa-minus-circle"></i>
+                            <br>
+                            Sem capa cadastrada
+                        </div>
                         <div class="caption">
-                            <h3>{{ latest.title}}</h3>
+                            <h4>{{ latest.title}}</h4>
                             <h4>{{latest.release_date}}</h4>
                             <p>{{latest.overview}}</p>
                             <p><a href="#" class="btn btn-primary" role="button">Ver Detalhes</a></p>
