@@ -10,23 +10,39 @@ class ControllerCatalogTmdbMovie extends Controller {
     }
 
     public function movieDetails() {
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm() && isset($this->request->post->movie_id)) {
-            $this->model_catalog_recurring->addRecurring($this->request->post);
-            $this->response->redirect($this->url->link('catalog/recurring', 'token=' . $this->session->data['token'] . $url, true));
+        if (($this->request->server['REQUEST_METHOD'] == 'GET') && $this->validateForm() && isset($this->request->get['movie_id'])) {
+            $data['movieId'] = $this->request->get['movie_id'];
+            $data['heading_title'] = $this->language->get('heading_title_movie_details');
+            $data['breadcrumbs'] = array();
+            $url = '';
+            $data['breadcrumbs'][] = array(
+                'text' => $this->language->get('text_home'),
+                'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
+            );
+
+            $data['breadcrumbs'][] = array(
+                'text' => $this->language->get('heading_title_movie_details'),
+                'href' => $this->url->link('catalog/tmdb_movie', 'token=' . $this->session->data['token'] . $url, true)
+            );
+            if (isset($this->error['warning'])) {
+                $data['error_warning'] = $this->error['warning'];
+            } else {
+                $data['error_warning'] = '';
+            }
+            $data['header'] = $this->load->controller('common/header');
+            $data['column_left'] = $this->load->controller('common/column_left');
+            $data['footer'] = $this->load->controller('common/footer');
+
+            $this->response->setOutput($this->load->view('catalog/tmdb_movie_details', $data));
         }
     }
 
     protected function validateForm() {
         $this->load->language('extension/dashboard/tmdb');
-        if (!$this->user->hasPermission('modify', 'catalog/tmdb')) {
+        if (!$this->user->hasPermission('modify', 'catalog/tmdb_movie')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
-        foreach ($this->request->post['recurring_description'] as $language_id => $value) {
-            if ((utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 255)) {
-                $this->error['name'][$language_id] = $this->language->get('error_name');
-            }
-        }
 
         if ($this->error && !isset($this->error['warning'])) {
             $this->error['warning'] = $this->language->get('error_warning');

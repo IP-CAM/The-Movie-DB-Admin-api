@@ -63,7 +63,7 @@
                         <a ng-if="latest.poster_path">
                             <img src="https://image.tmdb.org/t/p/w150/{{latest.poster_path}}" class="left" width="300" alt="{{latest.title}}">
                         </a>
-                        <div class="no-image" ng-if="!movie.poster_path">
+                        <div class="no-image" ng-if="!latest.poster_path">
                             <i class="fa fa-minus-circle"></i>
                             <br>
                             Sem capa cadastrada
@@ -72,7 +72,7 @@
                             <h4>{{ latest.title}}</h4>
                             <h4>{{latest.release_date}}</h4>
                             
-                            <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>" class="btn btn-primary" role="button">Ver Detalhes</a></p>
+                            <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>&movie_id={{latest.id}}" class="btn btn-primary" role="button">Ver Detalhes</a></p>
                         </div>
                     </div>
                 </div>
