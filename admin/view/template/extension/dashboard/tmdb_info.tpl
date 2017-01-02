@@ -49,7 +49,6 @@
                         </div>
                         <div class="caption">
                             <h4>{{ movie.title}}</h4>
-                            <p>{{movie.overview}}</p>
                             <p><a href="#" class="btn btn-primary" role="button details">Ver Detalhes</a></p>
                         </div>
                     </div>
@@ -72,8 +71,8 @@
                         <div class="caption">
                             <h4>{{ latest.title}}</h4>
                             <h4>{{latest.release_date}}</h4>
-                            <p>{{latest.overview}}</p>
-                            <p><a href="#" class="btn btn-primary" role="button">Ver Detalhes</a></p>
+                            
+                            <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>" class="btn btn-primary" role="button">Ver Detalhes</a></p>
                         </div>
                     </div>
                 </div>

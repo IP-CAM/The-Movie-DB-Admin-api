@@ -106,6 +106,7 @@ class ControllerExtensionDashboardTmdb extends Controller {
     public function dashboard() {
         $this->load->language('extension/dashboard/tmdb');
         $data['heading_title'] = $this->language->get('heading_title');
+        $data['token'] = $this->session->data['token'];
         return $this->load->view('extension/dashboard/tmdb_info', $data);
     }
 
