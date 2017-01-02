@@ -18,3 +18,4 @@ $_['entry_width']      = 'Width';
 $_['error_permission'] = 'Warning: You do not have permission to modify dashboard movies!';
 
 $_['heading_title_movie_details'] = "Detalhes do filme";
+$_['heading_title_user_movies'] = "Filmes do usuário";

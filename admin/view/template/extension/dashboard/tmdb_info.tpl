@@ -6,6 +6,7 @@
         </div>
         <div class="media-body">
             <h3 class="media-heading" style="margin: 28px 0 24px 24px">Módulo de integração com o The Movie Database</h3>
+            <a style="margin: 22px 0 0 0" href="index.php?route=catalog/tmdb_movie&token=<?php echo $token; ?>" class="btn btn-primary pull-right" role="button"><i class="fa fa-list"></i> Meus filmes</a>
         </div>
     </div>
     <div class="panel-body">

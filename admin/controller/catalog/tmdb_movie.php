@@ -6,7 +6,29 @@ class ControllerCatalogTmdbMovie extends Controller {
 
     public function index() {
         $this->load->language('extension/dashboard/tmdb');
-        $this->document->setTitle($this->language->get('heading_title'));
+        $data['heading_title'] = $this->language->get('heading_title_user_movies');
+        $data['breadcrumbs'] = array();
+        $url = '';
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('text_home'),
+            'href' => $this->url->link('common/dashboard', 'token=' . $this->session->data['token'], true)
+        );
+
+        $data['breadcrumbs'][] = array(
+            'text' => $this->language->get('heading_title_user_movies'),
+            'href' => $this->url->link('catalog/tmdb_movie', 'token=' . $this->session->data['token'] . $url, true)
+        );
+        if (isset($this->error['warning'])) {
+            $data['error_warning'] = $this->error['warning'];
+        } else {
+            $data['error_warning'] = '';
+        }
+        $data['token'] = $this->session->data['token'];
+        $data['header'] = $this->load->controller('common/header');
+        $data['column_left'] = $this->load->controller('common/column_left');
+        $data['footer'] = $this->load->controller('common/footer');
+
+        $this->response->setOutput($this->load->view('catalog/tmdb', $data));
     }
 
     public function movieDetails() {
