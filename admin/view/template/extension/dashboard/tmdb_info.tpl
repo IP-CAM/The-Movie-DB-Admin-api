@@ -1,3 +1,4 @@
+<link type="text/css" href="view/stylesheet/extension/dashboard/tmdb.css" rel="stylesheet" media="screen" />
 <div class="panel panel-default">
     <div class="panel-heading">
         <div class="media-left">
@@ -40,6 +41,7 @@
                         <a ng-if="movie.poster_path">
                             <img src="https://image.tmdb.org/t/p/w150/{{movie.poster_path}}" class="left" width="300" alt="{{movie.title}}">
                         </a>
+                        <div class="no-image">Sem capa cadastrada</div>
                         <div class="caption">
                             <h3>{{ movie.title}}</h3>
                             <p>{{movie.overview}}</p>
