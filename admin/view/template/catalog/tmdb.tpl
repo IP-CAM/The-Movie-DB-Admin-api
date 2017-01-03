@@ -46,8 +46,7 @@
                     <div class="caption">
                         <h4>{{ movie.title}}</h4>
                         <p>{{movie.release_date  | date:'dd/MM/yyyy'}}</p>
-                        <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-primary" role="button">Ver Detalhes</a></p>
-                        <p><a href="index.php?route=catalog/tmdb_movie/remove&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-danger" role="button">Remover filme</a></p>
+                        <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-primary" role="button">Ver Detalhes</a> <a href="index.php?route=catalog/tmdb_movie/remove&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-danger" role="button">Remover filme</a></p>
                     </div>
                 </div>
             </div>

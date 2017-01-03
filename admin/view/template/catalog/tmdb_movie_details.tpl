@@ -4,7 +4,6 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>
                 <a href="index.php?token=<?php echo $token; ?>" data-toggle="tooltip" title="Voltar" class="btn btn-default"><i class="fa fa-reply"></i></a>
             </div>
             <h1><?php echo $heading_title; ?></h1>
@@ -51,9 +50,17 @@
             </div>
 
         </div>
+        
         <div class='panel-footer '>
-            <p class=""><a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Adicionar aos meus filmes</a></p>
+            <?php if($inUserList){ ?>
+            <p class=""><span disabled="disabled" title="Este filme já consta em sua lista" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Adicionar aos meus filmes</span> <a href="index.php?route=catalog/tmdb_movie/remove&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-danger" role="button">Remover filme</a></p>
+            <?php }else{ ?>
+                <p class=""><a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Adicionar aos meus filmes</a></p>
+            <?php } ?>
+            
+            
         </div>  
+        
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
