@@ -25,19 +25,8 @@
                 </div>
             </fieldset>
             <hr>
-            <h3>Últimos lançamentos</h3>
-            <fieldset >
-
-                <div class="well col-lg-2">
-                    <h4>Filtrar por ano</h4>
-                    <select ng-model="year" ng-change="searchByYear()" class="form-control">
-                        <option value="2017">2017</option>
-                        <option value="2016">2016</option>
-                        <option value="2015">2015</option>
-                    </select>
-                </div>
-            </fieldset>
-            <div class="row">
+            <h3>Próximos lançamentos</h3>
+            <div class="row" ng-init="upcomming();latest()">
                 <div class="col-sm-2" ng-repeat="movie in results">
                     <div class="thumbnail">
                         <a ng-if="movie.poster_path">
@@ -50,14 +39,14 @@
                         </div>
                         <div class="caption">
                             <h4>{{ movie.title}}</h4>
-                            <p><a href="#" class="btn btn-primary" role="button details">Ver Detalhes</a></p>
+                            <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-primary" role="button">Ver Detalhes</a></p>
                         </div>
                     </div>
                 </div>
             </div>
             <hr>
                 
-            <h3>Adicionados recentemente no TMDB</h3>
+            <h3 id="date">Adicionados recentemente no TMDB</h3>
             <div class="row">
                 <div class="col-sm-2">
                     <div class="thumbnail">
@@ -71,8 +60,6 @@
                         </div>
                         <div class="caption">
                             <h4>{{ latest.title}}</h4>
-                            <h4>{{latest.release_date}}</h4>
-                            
                             <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>&movie_id={{latest.id}}" class="btn btn-primary" role="button">Ver Detalhes</a></p>
                         </div>
                     </div>
@@ -81,5 +68,7 @@
         </div>
     </div>
 </div>
+<script>
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 <script src="view/javascript/extension/module/themoviedb/searchCtrl.js"></script>

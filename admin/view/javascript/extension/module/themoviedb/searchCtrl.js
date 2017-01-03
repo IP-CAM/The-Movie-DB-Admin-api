@@ -7,35 +7,35 @@ var app = angular.module('myApp', []);
 app.controller('movieSearchCtrl', function ($scope, $http) {
     api_key = "b194419a3560ccbbfd27972fcad10634";
     $scope.searchString = "";
-    date = new Date();
-    year = date.getFullYear();
-    $scope.year = year.toString();
-
     $scope.msg = "";
     
+    
+    $scope.upcomming = function(){
+        url = "https://api.themoviedb.org/3/movie/upcoming?api_key=";
+        $http.get(
+                url
+                + api_key
+                + "&language=pt-BR"
+                + "&sort_by=primary_release_date.desc"
+                ).then(function (response) {
+            $scope.results = response.data.results;
+        });    
+    }
+    
+    $scope.latest = function(){
+        url = "https://api.themoviedb.org/3/movie/latest?api_key=";
+        $http.get(
+                url
+                + api_key
+                + "&language=pt-BR"
 
-    url = "https://api.themoviedb.org/3/discover/movie?api_key=";
-    $http.get(
-            url
-            + api_key
-            + "&language=pt-BR"
-            + "&primary_release_year=" + year
-            + "&sort_by=primary_release_date.desc"
+                ).then(function (response) {
+            console.log(response.data);
+            $scope.latest = response.data;
+        });
+    }
 
-            ).then(function (response) {
-        $scope.results = response.data.results;
-    });
-
-    url = "https://api.themoviedb.org/3/movie/latest?api_key=";
-    $http.get(
-            url
-            + api_key
-            + "&language=pt-BR"
-
-            ).then(function (response) {
-        console.log(response.data);
-        $scope.latest = response.data;
-    });
+    
 
     $scope.search = function () {
         if ($scope.searchString.length > 2) {
@@ -52,21 +52,8 @@ app.controller('movieSearchCtrl', function ($scope, $http) {
         } else {
             $scope.msg = "Digite um nome válido";
             $scope.results = "";
+            $scope.upcomming();
         }
-    }
-
-    $scope.searchByYear = function () {
-        url = "https://api.themoviedb.org/3/discover/movie?api_key=";
-        $http.get(
-                url
-                + api_key
-                + "&language=pt-BR"
-                + "&primary_release_year=" + $scope.year
-                + "&sort_by=primary_release_date.desc"
-
-                ).then(function (response) {
-            $scope.results = response.data.results;
-        });
     }
 
 });
