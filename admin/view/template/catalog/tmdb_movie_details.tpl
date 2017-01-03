@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="pull-right">
                 <a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-                <button type="button" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-attribute-group').submit() : false;"><i class="fa fa-trash-o"></i></button>
+                <a href="index.php?token=<?php echo $token; ?>" data-toggle="tooltip" title="Voltar" class="btn btn-default"><i class="fa fa-reply"></i></a>
             </div>
             <h1><?php echo $heading_title; ?></h1>
             <ul class="breadcrumb">
@@ -27,6 +27,7 @@
                 <h2>{{movie.title}}</h2>
             </div>
             <div class="panel-body">
+
                 <a ng-if="movie.poster_path">
                     <img src="https://image.tmdb.org/t/p/w150/{{movie.poster_path}}" class="left" width="300" alt="{{latest.title}}">
                 </a>
@@ -35,16 +36,17 @@
                     <br>
                         Sem capa cadastrada
                 </div>
-                <div class="col-lg-10">
-                    <span ng-if="movie.release_date">Data de lançamento {{movie.release_date}}</span>
-                    <span ng-if="!movie.release_date">Sem data de lançamento cadastrada</span>
-                    <span ng-if="movie.overview">{{movie.overview}}</span>
-                    <span ng-if="!movie.overview">Nenhuma descrição cadastrada para esse filme</span>
+                <div class="pull-left" style="margin: 0 0 0 15px">
+                    <h3 ng-if="movie.release_date">Data de lançamento {{movie.release_date}}</h3>
+                    <h3 ng-if="!movie.release_date">Sem data de lançamento cadastrada</h3>
+                    <p ng-if="movie.overview">{{movie.overview}}</p>
+                    <h4 ng-if="!movie.overview">Nenhuma descrição cadastrada para esse filme</h4>
                 </div>
-                <div class='row'>
-                    <p><a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Adicionar aos meus filmes</a></p>
-                </div>    
+
             </div>
+            <div class='panel-footer '>
+                <p class=""><a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Adicionar aos meus filmes</a></p>
+            </div>  
         </div>
     </div>
 </div>

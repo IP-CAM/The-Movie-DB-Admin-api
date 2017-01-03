@@ -4,6 +4,7 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
+                <a href="index.php?token=<?php echo $token; ?>" data-toggle="tooltip" title="Voltar" class="btn btn-default"><i class="fa fa-reply"></i></a>
             </div>
             <h1><?php echo $heading_title; ?></h1>
             <ul class="breadcrumb">
