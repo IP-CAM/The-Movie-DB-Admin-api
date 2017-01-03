@@ -31,4 +31,15 @@ class ModelExtensionMOduleThemoviedb extends Model {
             $query = $this->db->query($sql);
         }
         
+        public function getUserMovies($userID) {
+            $sql = "
+                SELECT
+                movie_id
+                FROM `" . DB_PREFIX . "themoviedb_module`
+                WHERE user_id = '" . $userID . "'    
+            ";
+            $query = $this->db->query($sql);
+            return $query->rows;
+        }
+        
 }

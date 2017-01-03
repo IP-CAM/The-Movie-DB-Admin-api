@@ -27,6 +27,8 @@ class ControllerCatalogTmdbMovie extends Controller {
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
+        
+        $data['movies'] = $this->getUserMovies($this->user->getId());
 
         $this->response->setOutput($this->load->view('catalog/tmdb', $data));
     }
@@ -79,6 +81,12 @@ class ControllerCatalogTmdbMovie extends Controller {
         }
 
         return !$this->error;
+    }
+    
+    private function getUserMovies($userId){
+        $this->load->model("extension/module/themoviedb");
+        $results = $this->model_extension_module_themoviedb->getUserMovies($userId);
+        return $results;
     }
 
 }
