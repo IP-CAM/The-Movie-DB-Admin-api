@@ -4,7 +4,6 @@
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <button type="button" data-toggle="tooltip" title="<?php echo $button_delete; ?>" class="btn btn-danger" onclick="confirm('<?php echo $text_confirm; ?>') ? $('#form-attribute-group').submit() : false;"><i class="fa fa-trash-o"></i></button>
             </div>
             <h1><?php echo $heading_title; ?></h1>
             <ul class="breadcrumb">
@@ -20,8 +19,14 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
         <?php } ?>
+        <?php if($success) { ?>
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> <?php echo $success; ?>
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        <?php } ?>
     </div>
     <div class="panel panel-default" ng-app="myApp" ng-controller="userMoviessCtrl">
+        <?php if($movies != ""){ ?>
         <div class="panel-heading">
             <h3 ng-init="getUserMovies('<?php echo $movies; ?>')">Filmes do usuário</h3>
         </div>
@@ -40,10 +45,16 @@
                     <div class="caption">
                         <h4>{{ movie.title}}</h4>
                         <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-primary" role="button">Ver Detalhes</a></p>
+                        <p><a href="index.php?route=catalog/tmdb_movie/remove&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-danger" role="button">Remover filme</a></p>
                     </div>
                 </div>
             </div>
         </div>
+        <?php }else{ ?>
+            <div class="panel-heading">
+                <h3>Nenhum filme cadastrado para este usuário</h3>
+            </div>
+        <?php } ?>
     </div>
 </div>
 

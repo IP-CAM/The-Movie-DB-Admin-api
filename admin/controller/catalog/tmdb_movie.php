@@ -23,12 +23,23 @@ class ControllerCatalogTmdbMovie extends Controller {
         } else {
             $data['error_warning'] = '';
         }
+        if(isset($this->request->get['success']) && $this->request->get['success'] != ""){
+            $data['success'] = "Filme removido com sucesso!";
+            
+        } else {
+            $data['success'] = "";    
+        }
         $data['token'] = $this->session->data['token'];
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
         
-        $data['movies'] = implode(",", $this->getUserMovies($this->user->getId()));
+        $movies = $this->getUserMovies($this->user->getId());
+        if($movies){
+            $data['movies'] = implode(",", $movies);
+        }else{
+            $data['movies'] = "";
+        }
         $this->response->setOutput($this->load->view('catalog/tmdb', $data));
     }
 
@@ -61,12 +72,26 @@ class ControllerCatalogTmdbMovie extends Controller {
         }
     }
     
+    
     public function add() {
         $this->load->model("extension/module/themoviedb");
-        
         $this->model_extension_module_themoviedb->add($this->request->get['movie_id'],$this->user->getId());
         $this->response->redirect($this->url->link('catalog/tmdb_movie/moviedetails', 'token=' . $this->session->data['token'] . "&movie_id=" . $this->request->get['movie_id'] . $url, true));
     }
+    
+    public function remove() {
+        $this->load->model("extension/module/themoviedb");
+        try {
+            $this->model_extension_module_themoviedb->remove($this->request->get['movie_id'],$this->user->getId());
+            $this->session->data['success'] = 1;
+            
+        } catch (Exception $e) {
+            $data['error_warning'] = "Não foi possível remover o filme";
+            $this->session->data['success'] = "";
+        }
+        $this->response->redirect($this->url->link('catalog/tmdb_movie', 'token=' . $this->session->data['token'] . "&success=" . $this->session->data['success'] . $url, true));
+    }
+    
 
     protected function validateForm() {
         $this->load->language('extension/dashboard/tmdb');
