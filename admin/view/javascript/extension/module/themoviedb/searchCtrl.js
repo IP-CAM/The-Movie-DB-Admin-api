@@ -56,7 +56,6 @@ app.controller('movieSearchCtrl', function ($scope, $http) {
     }
 
     $scope.searchByYear = function () {
-        console.log($scope.year);
         url = "https://api.themoviedb.org/3/discover/movie?api_key=";
         $http.get(
                 url

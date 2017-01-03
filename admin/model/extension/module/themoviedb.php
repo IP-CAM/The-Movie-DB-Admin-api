@@ -39,7 +39,10 @@ class ModelExtensionMOduleThemoviedb extends Model {
                 WHERE user_id = '" . $userID . "'    
             ";
             $query = $this->db->query($sql);
-            return $query->rows;
+            foreach ($query->rows as $result){
+                $moviesId[] = $result["movie_id"];
+            }
+            return $moviesId;
         }
         
 }
