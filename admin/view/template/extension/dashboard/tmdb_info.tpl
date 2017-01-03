@@ -39,6 +39,7 @@
                         </div>
                         <div class="caption">
                             <h4>{{ movie.title}}</h4>
+                            <p>{{movie.release_date  | date:'dd/MM/yyyy'}}</p>
                             <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>&movie_id={{movie.id}}" class="btn btn-primary" role="button">Ver Detalhes</a></p>
                         </div>
                     </div>
@@ -60,6 +61,7 @@
                         </div>
                         <div class="caption">
                             <h4>{{ latest.title}}</h4>
+                            <p>{{latest.release_date  | date:'dd/MM/yyyy'}}</p>
                             <p><a href="index.php?route=catalog/tmdb_movie/moviedetails&token=<?php echo $token; ?>&movie_id={{latest.id}}" class="btn btn-primary" role="button">Ver Detalhes</a></p>
                         </div>
                     </div>
