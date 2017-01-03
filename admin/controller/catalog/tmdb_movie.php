@@ -18,26 +18,25 @@ class ControllerCatalogTmdbMovie extends Controller {
             'text' => $this->language->get('heading_title_user_movies'),
             'href' => $this->url->link('catalog/tmdb_movie', 'token=' . $this->session->data['token'] . $url, true)
         );
-        if (isset($this->error['warning'])) {
+        if (isset($this->error['warning']) && $this->request->get['warning'] != "") {
             $data['error_warning'] = $this->error['warning'];
         } else {
             $data['error_warning'] = '';
         }
-        if(isset($this->request->get['success']) && $this->request->get['success'] != ""){
+        if (isset($this->request->get['success']) && $this->request->get['success'] != "") {
             $data['success'] = "Filme removido com sucesso!";
-            
         } else {
-            $data['success'] = "";    
+            $data['success'] = "";
         }
         $data['token'] = $this->session->data['token'];
         $data['header'] = $this->load->controller('common/header');
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
-        
+
         $movies = $this->getUserMovies($this->user->getId());
-        if($movies){
+        if ($movies) {
             $data['movies'] = implode(",", $movies);
-        }else{
+        } else {
             $data['movies'] = "";
         }
         $this->response->setOutput($this->load->view('catalog/tmdb', $data));
@@ -58,10 +57,15 @@ class ControllerCatalogTmdbMovie extends Controller {
                 'text' => $this->language->get('heading_title_movie_details'),
                 'href' => $this->url->link('catalog/tmdb_movie', 'token=' . $this->session->data['token'] . $url, true)
             );
-            if (isset($this->error['warning'])) {
-                $data['error_warning'] = $this->error['warning'];
+            if (isset($this->request->get['warning']) && $this->request->get['warning'] == 1) {
+                $data['error_warning'] = "Este filme já consta na sua lista.";
             } else {
                 $data['error_warning'] = '';
+            }
+            if (isset($this->request->get['success']) && $this->request->get['success'] == 1) {
+                $data['success'] = "Filme adicionado com sucesso!";
+            } else {
+                $data['success'] = "";
             }
             $data['token'] = $this->session->data['token'];
             $data['header'] = $this->load->controller('common/header');
@@ -71,27 +75,46 @@ class ControllerCatalogTmdbMovie extends Controller {
             $this->response->setOutput($this->load->view('catalog/tmdb_movie_details', $data));
         }
     }
-    
-    
+
     public function add() {
-        $this->load->model("extension/module/themoviedb");
-        $this->model_extension_module_themoviedb->add($this->request->get['movie_id'],$this->user->getId());
-        $this->response->redirect($this->url->link('catalog/tmdb_movie/moviedetails', 'token=' . $this->session->data['token'] . "&movie_id=" . $this->request->get['movie_id'] . $url, true));
+        if (!$this->inUserList($this->user->getId(), $this->request->get['movie_id'])) {
+            $this->load->model("extension/module/themoviedb");
+            try {
+                $this->model_extension_module_themoviedb->add($this->request->get['movie_id'], $this->user->getId());
+                $this->session->data['success'] = 1;
+                $data['errorwarning'] = "";
+            } catch (Exception $e) {
+                $data['errorwarning'] = "Não foi possível adicionar o filme";
+                $data['errorwarning'] = "";
+            }
+        } else {
+            $data['errorwarning'] = 1;
+            $this->session->data['success'] = '';
+        }
+        $this->response->redirect($this->url->link('catalog/tmdb_movie/moviedetails', 'token=' . $this->session->data['token'] . "&movie_id=" . $this->request->get['movie_id'] . "&warning=" . $data['errorwarning'] . "&success=" . $this->session->data['success'] . $url, true));
     }
     
+    /**
+     * Verifica se um filme já consta na lista de um usuário
+     * @param int $userId
+     * @param int $movieId
+     * @return boolean
+     */
+    private function inUserList($userId, $movieId) {
+        return in_array($movieId, $this->getUserMovies($userId));
+    }
+
     public function remove() {
         $this->load->model("extension/module/themoviedb");
         try {
-            $this->model_extension_module_themoviedb->remove($this->request->get['movie_id'],$this->user->getId());
+            $this->model_extension_module_themoviedb->remove($this->request->get['movie_id'], $this->user->getId());
             $this->session->data['success'] = 1;
-            
         } catch (Exception $e) {
             $data['error_warning'] = "Não foi possível remover o filme";
             $this->session->data['success'] = "";
         }
         $this->response->redirect($this->url->link('catalog/tmdb_movie', 'token=' . $this->session->data['token'] . "&success=" . $this->session->data['success'] . $url, true));
     }
-    
 
     protected function validateForm() {
         $this->load->language('extension/dashboard/tmdb');
@@ -106,8 +129,8 @@ class ControllerCatalogTmdbMovie extends Controller {
 
         return !$this->error;
     }
-    
-    private function getUserMovies($userId){
+
+    private function getUserMovies($userId) {
         $this->load->model("extension/module/themoviedb");
         $results = $this->model_extension_module_themoviedb->getUserMovies($userId);
         return $results;

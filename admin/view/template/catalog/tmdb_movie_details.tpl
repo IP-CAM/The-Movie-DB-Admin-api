@@ -21,34 +21,40 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
         <?php } ?>
-
-        <div class="panel panel-default" ng-app="myApp" ng-controller="movieDetailsCtrl">
-            <div class="panel-heading" ng-init="getMovie('<?php echo $movieId; ?>')">
-                <h2>{{movie.title}}</h2>
-            </div>
-            <div class="panel-body">
-
-                <a ng-if="movie.poster_path">
-                    <img src="https://image.tmdb.org/t/p/w150/{{movie.poster_path}}" class="left" width="300" alt="{{latest.title}}">
-                </a>
-                <div class="no-image col-lg-2" ng-if="!movie.poster_path">
-                    <i class="fa fa-minus-circle"></i>
-                    <br>
-                        Sem capa cadastrada
-                </div>
-                <div class="pull-left" style="margin: 0 0 0 15px">
-                    <h3 ng-if="movie.release_date">Data de lançamento {{movie.release_date}}</h3>
-                    <h3 ng-if="!movie.release_date">Sem data de lançamento cadastrada</h3>
-                    <p ng-if="movie.overview">{{movie.overview}}</p>
-                    <h4 ng-if="!movie.overview">Nenhuma descrição cadastrada para esse filme</h4>
-                </div>
-
-            </div>
-            <div class='panel-footer '>
-                <p class=""><a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Adicionar aos meus filmes</a></p>
-            </div>  
+        <?php if($success) { ?>
+        <div class="alert alert-success"><i class="fa fa-check-circle"></i> <?php echo $success; ?>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
+        <?php } ?>
     </div>
+
+    <div class="panel panel-default" ng-app="myApp" ng-controller="movieDetailsCtrl">
+        <div class="panel-heading" ng-init="getMovie('<?php echo $movieId; ?>')">
+            <h2>{{movie.title}}</h2>
+        </div>
+        <div class="panel-body">
+
+            <a ng-if="movie.poster_path" class="pull-left">
+                <img src="https://image.tmdb.org/t/p/w150/{{movie.poster_path}}" class="left" width="300" alt="{{latest.title}}">
+            </a>
+            <div class="no-image col-lg-2" ng-if="!movie.poster_path">
+                <i class="fa fa-minus-circle"></i>
+                <br>
+                    Sem capa cadastrada
+            </div>
+            <div class="pull-left" style="margin: 0 0 0 15px">
+                <h3 ng-if="movie.release_date">Data de lançamento {{movie.release_date}}</h3>
+                <h3 ng-if="!movie.release_date">Sem data de lançamento cadastrada</h3>
+                <p ng-if="movie.overview">{{movie.overview}}</p>
+                <h4 ng-if="!movie.overview">Nenhuma descrição cadastrada para esse filme</h4>
+            </div>
+
+        </div>
+        <div class='panel-footer '>
+            <p class=""><a href="index.php?route=catalog/tmdb_movie/add&token=<?php echo $token; ?>&movie_id=<?php echo $movieId; ?>" class="btn btn-primary" role="button"><i class="fa fa-plus"></i> Adicionar aos meus filmes</a></p>
+        </div>  
+    </div>
+</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 <script src="view/javascript/extension/module/themoviedb/detailsCtrl.js"></script>
