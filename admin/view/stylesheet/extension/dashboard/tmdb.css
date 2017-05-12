@@ -1,0 +1,25 @@
+/**
+The Movie Database Plugin
+Criado por Michel Lima
+**/
+
+.no-image {
+    border: 1px solid #eee;
+    font-size: 18px;
+    height: 386px;
+    text-align: center;
+}
+.no-image i {
+    color: #1872a2;
+    font-size: 60px;
+    margin: 157px 0 5px;
+}
+.details{
+    width: 100%;
+}
+.thumbnail{
+    height: 540px;
+}
+.thumbnail image{
+    max-height: 400px;
+}
