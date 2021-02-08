@@ -1,15 +1,15 @@
 # opencart-themoviedb
-Plugin de integração do OpenCart e a api do The Movie DB
+OpenCart integration plugin and The Movie DB api
 
-#Instalação
+#Installation
 
-1 - Instale o Opencart normalmente.
+1 - Install Opencart normally.
 
-2 - Enviar os arquivos do plugin para a pasta onde o Opencart está instalado.
+2 - Send the plugin files to the folder where Opencart is installed.
 
-3 - Habilite o plugin em Extensions > Dashboard.
+3 - Enable the plugin in Extensions> Dashboard.
 
-4 - Adicione a permissão no plugin: 
-Ir no menu Users > Users groups, clicar em editar no grupo de usuários ao qual seu usuário pertence e marcar todas as páginas do plugin.
+4 - Add permission in the plugin:
+Go to the Users> Users groups menu, click on edit in the user group to which your user belongs and mark all the pages of the plugin.
 
-5 - A tela dos filme deve ficar na página inicial, no dashboard. 
+5 - The screen of the films must be on the home page, on the dashboard. 
